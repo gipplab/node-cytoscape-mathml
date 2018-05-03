@@ -1,9 +1,9 @@
 {
-  "name": "mathml",
+  "name": "cytoscape-mathml",
   "version": "1.0.0",
-  "description": "MathML allows to load modify and render MathML input. It is based on the XML processing node module xtraverse.",
+  "description": "Cytoscape MathML is a plugin to the graph visualization cytoscape with the dagre-plugin and provides the interactivity with the   MathML tree.n the XML processing node module xtraverse.",
   "repository": {
-    "url": "git+ssh://git@github.com/ag-gipp/node-mathml.git",
+    "url": "git+ssh://git@github.com/ag-gipp/node-cytoscape-mathml.git",
     "type": "git"
   },
   "engines": {
@@ -15,10 +15,14 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
-  "main": "app/MathML/MathMLRenderer.js",
+  "main": "mathml-cytoscape.js",
   "dependencies": {
-    "xpath": "0.0.27",
-    "xtraverse": "^0.1.0"
+    "mathml": "1.0.0",
+    "cytoscape":"^3.2.11",
+    "cytoscape-dagre": "^2.2.1",
+    "cytoscape-popper": "^1.0.1",
+    "tippy.js": "^2.5.2",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "eslint": "^4.11.0",
@@ -33,9 +37,9 @@
     "mocha-eslint": "^4.1.0"
   },
   "bugs": {
-    "url": "https://github.com/ag-gipp/node-mathml/issues"
+    "url": "https://github.com/ag-gipp/node-cytoscape-mathml/issues"
   },
-  "homepage": "https://github.com/ag-gipp/node-mathml#readme",
+  "homepage": "https://github.com/ag-gipp/node-cytoscape-mathml#readme",
   "directories": {
     "test": "test"
   },
@@ -43,7 +47,8 @@
     "mathml",
     "math",
     "xml",
-    "mathml3"
+    "mathml3",
+    "cytoscape"
   ],
   "author": "Moritz Schubotz",
   "license": "Apache-2.0"
