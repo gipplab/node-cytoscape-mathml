@@ -18,7 +18,7 @@
   "main": "mathml-cytoscape.js",
   "dependencies": {
     "mathml": "1.0.1",
-    "cytoscape":"^3.2.11",
+    "cytoscape":"^3.2.18",
     "cytoscape-dagre": "^2.2.1",
     "cytoscape-popper": "^1.0.1",
     "tippy.js": "^2.5.2",
