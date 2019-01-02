@@ -39,6 +39,7 @@ mml.base.prototype.toCytoscape = function(options = {}) {
     elements.push({
       group: 'edges',
       data: {
+        id: `${parent.id}-${child.id}`,
         source: parent.id,
         target: child.id
       },
