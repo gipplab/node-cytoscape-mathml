@@ -7,6 +7,8 @@ const assert = require('assert');
 
 const file = path.join(__dirname,'..','data','09-goat.mml.xml');
 const xmlString = fs.readFileSync(file, 'utf8');
+const fileA = path.join(__dirname,'..','data','07-orig-1-21.mml.xml');
+const xmlStringA = fs.readFileSync(fileA, 'utf8');
 
 describe('cytoscape rendering', () => {
 
@@ -39,14 +41,31 @@ describe('cytoscape rendering', () => {
     cy.destroy();
   });
   it('should work with example 07', () => {
-    const file = path.join(__dirname,'..','data','07-orig-1-21.mml.xml');
-    const xmlString = fs.readFileSync(file, 'utf8');
-    const mathml = cytoscapeRenderer(xmlString);
+    const mathml = cytoscapeRenderer(xmlStringA);
     const cy = mathml.toCytoscape({
       headless: true,
       styleEnabled: true
     });
     assert(cy);
+    assert.equal(cy.elements().length,105);
+    assert.equal(cy.edges().length,52);
+    assert.equal(cy.nodes().length,53);
     cy.destroy();
   });
 });
+
+describe('cytoscape comparison', () => {
+  it('should display similaries example 07', () => {
+    const mml = cytoscapeRenderer(xmlString);
+    const cy = mml.compareTo({
+      headless: true,
+      styleEnabled: true
+    }, mml);
+    assert(cy);
+    assert.equal(cy.elements().length, 39 * 2);
+    assert.equal(cy.edges().length, 19 * 2);
+    assert.equal(cy.nodes().length, 20 * 2);
+    cy.destroy();
+  });
+});
+

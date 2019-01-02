@@ -6,6 +6,7 @@ const dagre = require('cytoscape-dagre');
 const popper = require('cytoscape-popper');
 const tippy = require('tippy.js');
 const cxtmenu = require('cytoscape-cxtmenu');
+const base = require('xtraverse/lib/collection.js');
 const _ = require('lodash');
 
 cytoscape.use(dagre);
@@ -22,33 +23,33 @@ function layout(cy) {
 
 }
 
-mml.base.prototype.toCytoscape = function(options = {}) {
+function addNode(elements, n) {
+  elements.push({
+    group: 'nodes',
+    data: n,
+    classes: 'top-center'
+  });
+}
+
+function addEdge(elements, child, parent) {
+  elements.push({
+    group: 'edges',
+    data: {
+      id: `${parent.id}-${child.id}`,
+      source: parent.id,
+      target: child.id
+    },
+    classes: 'hierarchy'
+  });
+}
+
+
+mml.base.prototype.toCytoscape = function(options = {}, elements = []) {
   const defaults = {
     exScalingFactor: 12,
     minNodeSize: 30,
   };
-  const elements = [];
   let applyForm = false;
-
-  function addNode(elements, n) {
-    elements.push({
-      group: 'nodes',
-      data: n,
-      classes: 'top-center'
-    });
-  }
-
-  function addEdge(elements, child, parent) {
-    elements.push({
-      group: 'edges',
-      data: {
-        id: `${parent.id}-${child.id}`,
-        source: parent.id,
-        target: child.id
-      },
-      classes: 'hierarchy'
-    });
-  }
 
   function isApply(n) {
     return n.data() && n.data().name() === 'apply';
@@ -208,6 +209,18 @@ Wikidata ${symbol}</a></h3><p> ${_.get(json, `entities[${symbol}].labels.en.valu
   cy.endBatch();
   return cy;
 };
+
+mml.base.prototype.compareTo = function(options, treeB, similarites = false) {
+  const elements = [];
+  // Deep clone nodes to prevent unwanted modifications
+  const mmlA = base.wrap(this.cloneDoc());
+  const mmlB = base.wrap(treeB.cloneDoc());
+  mmlA.prefixName('A.');
+  mmlB.prefixName('B.');
+  mmlA._addCTreeElements(elements, addNode, addEdge);
+  return mmlB.toCytoscape(options, elements);
+};
+
 
 module.exports.mml = mml;
 
