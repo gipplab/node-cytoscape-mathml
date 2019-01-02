@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-mathml",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cytoscape MathML is a plugin to the graph visualization cytoscape with the dagre-plugin and provides the interactivity with the   MathML tree.n the XML processing node module xtraverse.",
   "repository": {
     "url": "git+ssh://git@github.com/ag-gipp/node-cytoscape-mathml.git",
