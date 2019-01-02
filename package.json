@@ -11,18 +11,19 @@
   },
   "scripts": {
     "coverage": "istanbul cover _mocha -- -R spec",
-    "test": "PREQ_CONNECT_TIMEOUT=15 mocha && nsp check",
+    "test": "PREQ_CONNECT_TIMEOUT=15 mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
   "main": "mathml-cytoscape.js",
   "dependencies": {
-    "mathml": "1.0.2",
-    "cytoscape":"^3.2.18",
+    "cytoscape": "^3.2.18",
+    "cytoscape-cxtmenu": "^3.0.2",
     "cytoscape-dagre": "^2.2.1",
     "cytoscape-popper": "^1.0.1",
-    "tippy.js": "^3.0.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "mathml": "1.0.2",
+    "tippy.js": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^5.0.0",

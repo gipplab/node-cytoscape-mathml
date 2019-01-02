@@ -47,5 +47,6 @@ describe('cytoscape rendering', () => {
       styleEnabled: true
     });
     assert(cy);
+    cy.destroy();
   });
 });
