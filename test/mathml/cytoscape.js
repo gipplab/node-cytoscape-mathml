@@ -38,4 +38,14 @@ describe('cytoscape rendering', () => {
     // required if headless styles are enabled
     cy.destroy();
   });
+  it('should work with example 07', () => {
+    const file = path.join(__dirname,'..','data','07-orig-1-21.mml.xml');
+    const xmlString = fs.readFileSync(file, 'utf8');
+    const mathml = cytoscapeRenderer(xmlString);
+    const cy = mathml.toCytoscape({
+      headless: true,
+      styleEnabled: true
+    });
+    assert(cy);
+  });
 });

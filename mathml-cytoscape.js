@@ -73,11 +73,7 @@ mml.base.prototype.toCytoscape = function(options = {}) {
     const eff = Math.max(n.numericStyle(what) * defaults.exScalingFactor, defaults.minNodeSize);
     n.style(what, eff);
     // log(`set dimension ${what} to ${xSvg.attr(what)} (${eff}px)`);
-    if (eff > oldLength) {
-      return true;
-    } else {
-      return false;
-    }
+    return eff > oldLength;
   }
 
   function setBackground(n) {
