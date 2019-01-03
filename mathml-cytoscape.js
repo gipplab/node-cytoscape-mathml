@@ -210,7 +210,7 @@ Wikidata ${symbol}</a></h3><p> ${_.get(json, `entities[${symbol}].labels.en.valu
   return cy;
 };
 
-mml.base.prototype.compareTo = function(options, treeB, similarites = false) {
+mml.base.prototype.compareTo = function(options, treeB, similarites = []) {
   const elements = [];
   // Deep clone nodes to prevent unwanted modifications
   const mmlA = base.wrap(this.cloneDoc());
@@ -218,7 +218,31 @@ mml.base.prototype.compareTo = function(options, treeB, similarites = false) {
   mmlA.prefixName('A.');
   mmlB.prefixName('B.');
   mmlA._addCTreeElements(elements, addNode, addEdge);
-  return mmlB.toCytoscape(options, elements);
+  const cy = mmlB.toCytoscape(options, elements);
+  similarites.forEach((s) => {
+    const sourceId = `A.${s.id}`;
+    const sourceNode = cy.$id(sourceId);
+    s.matches.forEach((m) => {
+      const targetId = `B.${m.id}`;
+      const targetNode = cy.$id(targetId);
+      switch (m.type) {
+      case "identical":
+        sourceNode.successors().forEach(c => c.remove());
+        targetNode.successors().forEach(c => c.remove());
+        targetNode.incomers("edge").forEach(i => i.move({
+          source: i.source().id(),
+          target: sourceId
+        }));
+        targetNode.remove();
+        break;
+      case "similar":
+        break;
+      default:
+        throw new Error(`Similarity type ${m.type} is not supported.`);
+      }
+    });
+  });
+  return cy;
 };
 
 
