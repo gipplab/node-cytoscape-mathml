@@ -28,7 +28,7 @@
   "devDependencies": {
     "eslint": "^5.0.0",
     "eslint-config-node-services": "^2.0.2",
-    "eslint-config-wikimedia": "^0.10.0",
+    "eslint-config-wikimedia": "^0.11.0",
     "eslint-plugin-jsdoc": "^4.0.0",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-mocha": "^5.0.0",
