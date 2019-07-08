@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-mathml",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cytoscape MathML is a plugin to the graph visualization cytoscape with the dagre-plugin and provides the interactivity with the   MathML tree.n the XML processing node module xtraverse.",
   "repository": {
     "url": "git+ssh://git@github.com/ag-gipp/node-cytoscape-mathml.git",
@@ -22,19 +22,19 @@
     "cytoscape-dagre": "^2.2.1",
     "cytoscape-popper": "^1.0.1",
     "lodash": "^4.17.10",
-    "mathml": "1.1.2",
-    "tippy.js": "^4.0.0"
+    "mathml": "1.1.9",
+    "tippy.js": "^4.3.4"
   },
   "devDependencies": {
-    "eslint": "^6.0.0",
+    "eslint": "^6.0.1",
     "eslint-config-node-services": "^2.0.2",
-    "eslint-config-wikimedia": "^0.10.0",
+    "eslint-config-wikimedia": "^0.13.0",
     "eslint-plugin-jsdoc": "^15.0.1",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-mocha": "^5.0.0",
     "istanbul": "^0.4.5",
     "jquery": "^3.3.1",
-    "mocha": "^6.0.0",
+    "mocha": "^6.1.4",
     "mocha-eslint": "^5.0.0"
   },
   "bugs": {

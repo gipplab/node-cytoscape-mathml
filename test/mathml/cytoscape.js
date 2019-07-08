@@ -85,5 +85,20 @@ describe('cytoscape comparison', () => {
     assert.equal(cy.edges().length, goatEdges * 2 - 3 - 3);
     cy.destroy();
   });
+  it('should highlight RHS in two goates', () => {
+    const mml = cytoscapeRenderer(xmlString);
+    const cy = mml.compareTo({
+      headless: true,
+      styleEnabled: true
+    }, mml, [{
+      id: "e42",
+      matches: [{ id: "e42", type: "similar" }]
+    }]);
+    assert(cy);
+    assert.equal(cy.elements().length, goatElements * 2 - 4 );
+    assert.equal(cy.nodes().length, goatNodes * 2 );
+    assert.equal(cy.edges().length, goatEdges * 2 - 4 );
+    cy.destroy();
+  });
 });
 

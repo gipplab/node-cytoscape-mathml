@@ -225,6 +225,7 @@ mml.base.prototype.compareTo = function(options, treeB, similarites = []) {
     s.matches.forEach((m) => {
       const targetId = `B.${m.id}`;
       const targetNode = cy.$id(targetId);
+      let compoundNode;
       switch (m.type) {
       case "identical":
         sourceNode.successors().forEach(c => c.remove());
@@ -234,8 +235,26 @@ mml.base.prototype.compareTo = function(options, treeB, similarites = []) {
           target: sourceId
         }));
         targetNode.remove();
+        sourceNode.addClass('match math-identical');
         break;
       case "similar":
+        sourceNode.successors().forEach(c => c.hide());
+        targetNode.successors().forEach(c => c.hide());
+        compoundNode = cy.add({
+          group: 'nodes',
+          data: {
+            id: `match-similar-${sourceId}-${targetId}`,
+            label: 'Similar',
+          },
+          classes: 'matchContainer'
+        });
+        sourceNode
+          .move({ parent: compoundNode.id() })
+          .addClass('match match-similar');
+        targetNode
+          .move({ parent: compoundNode.id() })
+          .addClass('match match-similar');
+        targetNode.remove();
         break;
       default:
         throw new Error(`Similarity type ${m.type} is not supported.`);
