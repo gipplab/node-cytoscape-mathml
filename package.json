@@ -23,7 +23,7 @@
     "cytoscape-popper": "^1.0.1",
     "lodash": "^4.17.10",
     "mathml": "1.1.9",
-    "tippy.js": "^4.3.4"
+    "tippy.js": "^6.0.3"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
