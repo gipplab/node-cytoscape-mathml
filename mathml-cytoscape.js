@@ -142,6 +142,7 @@ mml.base.prototype.toCytoscape = function(options = {}, elements = []) {
       const ref = n.popperRef(); // used only for positioning
       const cs = n.data()[0].textContent;
       const t = tippy(ref, {
+        // eslint-disable-next-line no-undef
         content: document.querySelector('#tooltipTemplate'),
         onShow(tip) {
           tip.setContent(cs);
@@ -157,6 +158,7 @@ mml.base.prototype.toCytoscape = function(options = {}, elements = []) {
       const symbol = n.data()[0].textContent;
       const cd = 'wikidata';
       const t = tippy(ref, {
+        // eslint-disable-next-line no-undef
         content: document.querySelector('#tooltipTemplate'),
         onShow(tip) {
           tip.setContent(`Fetching information for symbol ${symbol} from content directory ${cd}.`);
@@ -175,7 +177,7 @@ Wikidata ${symbol}</a></h3><p> ${_.get(json, `entities[${symbol}].labels.en.valu
               })
                 .catch((e) => {
                   console.error(e);
-                  content.innerHTML = 'Loading failed';
+                  tip.setContent('Loading failed');
                 });
             }
           }
@@ -194,13 +196,13 @@ Wikidata ${symbol}</a></h3><p> ${_.get(json, `entities[${symbol}].labels.en.valu
     const expansion = n.data().expansion;
     if (expansion === 'collapsed') {
       n.data().expansion = false;
-      const nodesToShow = n.successors(n => n.hidden());
+      const nodesToShow = n.successors(node => node.hidden());
       nodesToShow.data('expansion', false);
       nodesToShow.show();
       layout(cy);
     } else {
       n.data().expansion = 'collapsed';
-      const nodesToHide = n.successors(n => n.visible());
+      const nodesToHide = n.successors(node => node.visible());
       nodesToHide.hide();
     }
     setBackground(n);
