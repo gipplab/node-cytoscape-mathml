@@ -2,14 +2,18 @@
 
 const mml = require('mathml');
 const cytoscape = require('cytoscape');
-const dagre = require('cytoscape-dagre');
 const popper = require('cytoscape-popper');
 const tippy = require('tippy.js');
 const cxtmenu = require('cytoscape-cxtmenu');
 const base = require('xtraverse/lib/collection.js');
 const _ = require('lodash');
 
-cytoscape.use(dagre);
+// See https://github.com/cytoscape/cytoscape.js-dagre/issues/62
+if (typeof (window) !== 'undefined') {
+  const dagre = require('cytoscape-dagre');
+  cytoscape.use(dagre);
+}
+
 cytoscape.use(popper);
 cytoscape.use(cxtmenu);
 
@@ -84,7 +88,6 @@ mml.base.prototype.toCytoscape = function(options = {}, elements = []) {
   function setBackground(n) {
     const imgUrl = n.data().imgUrl();
     n.style('background-image', imgUrl);
-    // eslint-disable-next-line no-undef
     // while one could use isomorphic fetch, one does not need the svg dimensions in a headless environment
     if (typeof fetch !== "undefined") {
       // eslint-disable-next-line no-undef
