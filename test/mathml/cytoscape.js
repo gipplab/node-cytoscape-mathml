@@ -102,5 +102,15 @@ describe('cytoscape comparison', () => {
     assert.equal(cy.edges().length, goatEdges * 2 - 4);
     cy.destroy();
   });
+  it('should report unknown similarity types', () => {
+    const mml = cytoscapeRenderer(xmlString);
+    assert.throws(() => mml.compareTo({
+      headless: true,
+      styleEnabled: true
+    }, mml, [{
+      id: "e42",
+      matches: [{ id: "e42", type: "wrong-type" }]
+    }]), Error);
+  });
 });
 

@@ -262,6 +262,7 @@ mml.base.prototype.compareTo = function(options, treeB, similarites = []) {
         targetNode.remove();
         break;
       default:
+        cy.destroy();
         throw new Error(`Similarity type ${m.type} is not supported.`);
       }
     });
